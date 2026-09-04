@@ -1,0 +1,376 @@
+:root {
+    --media-black: #141414;
+    --media-text: #e5e5e5;
+    --media-muted: #a7a7a7;
+    --tv-surface: #1f1f1f;
+    --tv-accent: #f5a623;
+}
+
+.mediaPageShell {
+    min-height: 100%;
+    background: var(--media-black);
+    color: var(--media-text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.mediaPageShell--livetv {
+    background: var(--tv-surface);
+}
+
+/* Netflix-style library experience */
+.mediaPageShell--netflix .homePage,
+.mediaPageShell--netflix .libraryPage {
+    background: var(--media-black) !important;
+}
+
+.mediaPageShell--netflix .sectionTitleContainer {
+    margin-top: 1.4rem;
+}
+
+.mediaPageShell--netflix .sectionTitle {
+    color: var(--media-text);
+    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+    font-weight: 700;
+}
+
+.mediaPageShell--netflix .itemsContainer {
+    scroll-behavior: smooth;
+}
+
+.mediaPageShell--netflix .card,
+.mediaPageShell--netflix .cardBox {
+    transition: transform 180ms ease, z-index 180ms ease;
+}
+
+.mediaPageShell--netflix .card:hover,
+.mediaPageShell--netflix .card:focus-within {
+    transform: scale(1.045);
+    z-index: 3;
+}
+
+.mediaHeroBanner {
+    position: relative;
+    min-height: min(68vh, 720px);
+    margin: -1rem -1rem 0;
+    display: flex;
+    align-items: flex-end;
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.mediaHeroBanner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(20, 20, 20, .96) 0%, rgba(20, 20, 20, .55) 42%, rgba(20, 20, 20, .05) 75%), linear-gradient(0deg, #141414 0%, transparent 45%);
+}
+
+.mediaHeroBanner__content {
+    position: relative;
+    max-width: 620px;
+    padding: 3rem clamp(1rem, 5vw, 5rem);
+}
+
+.mediaHeroBanner h1 {
+    margin: 0 0 .6rem;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+}
+
+.mediaHeroBanner p {
+    color: #ddd;
+    line-height: 1.55;
+}
+
+.mediaHeroBanner__subtitle {
+    color: #ccc;
+    font-weight: 600;
+}
+
+.mediaHeroBanner__actions {
+    display: flex;
+    gap: .75rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+}
+
+.mediaHeroBanner button,
+.mediaCarousel__controls button,
+.mediaTvGuide__toolbar button {
+    min-width: 48px;
+    min-height: 48px;
+    border: 0;
+    border-radius: 4px;
+    padding: .7rem 1rem;
+    cursor: pointer;
+}
+
+.mediaCarousel {
+    position: relative;
+    margin: 1.75rem 0;
+}
+
+.mediaCarousel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 .25rem;
+}
+
+.mediaCarousel__header h2 {
+    margin: 0 0 .75rem;
+}
+
+.mediaCarousel__controls {
+    display: flex;
+    gap: .25rem;
+}
+
+.mediaCarousel__track {
+    display: flex;
+    gap: .75rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    padding: .25rem .5rem 1rem;
+}
+
+.mediaCarousel__track::-webkit-scrollbar {
+    display: none;
+}
+
+.mediaMovieCard {
+    flex: 0 0 clamp(140px, 15vw, 220px);
+    scroll-snap-align: start;
+}
+
+.mediaMovieCard__button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+}
+
+.mediaMovieCard__image {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #242424;
+}
+
+.mediaMovieCard__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mediaMovieCard__overlay {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    padding: 2.4rem .7rem .7rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, .9));
+    opacity: 0;
+    transition: opacity 160ms ease;
+}
+
+.mediaMovieCard__button:hover .mediaMovieCard__overlay,
+.mediaMovieCard__button:focus-visible .mediaMovieCard__overlay {
+    opacity: 1;
+}
+
+.mediaMovieCard__play {
+    font-size: 1.2rem;
+}
+
+/* Plex-style Live TV guide */
+.mediaPageShell--livetv .libraryPage {
+    background: var(--tv-surface) !important;
+}
+
+.mediaPageShell--livetv .sectionTitle {
+    color: #f5f5f5;
+}
+
+.mediaTvGuide {
+    position: relative;
+    color: #fff;
+    background: var(--tv-surface);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mediaTvGuide__toolbar {
+    display: flex;
+    gap: .5rem;
+    padding: .75rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.mediaTvGuide__toolbar button {
+    background: #292929;
+    color: #fff;
+}
+
+.mediaTvGuide__toolbar button:hover,
+.mediaTvGuide__toolbar button:focus-visible {
+    background: var(--tv-accent);
+    color: #111;
+}
+
+.mediaTvGuide__viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: grab;
+}
+
+.mediaTvGuide__timeline {
+    position: relative;
+    min-width: 100%;
+    min-height: 120px;
+}
+
+.mediaTvGuide__now {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    z-index: 20;
+    background: #e53935;
+    pointer-events: none;
+}
+
+.mediaTvChannelRow {
+    position: relative;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 86px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.mediaTvChannelRow__channel {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .75rem 1rem;
+    background: #242424;
+}
+
+.mediaTvChannelRow__channel img {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+}
+
+.mediaTvChannelRow__channel strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mediaTvChannelRow__programs {
+    position: relative;
+    min-width: 0;
+}
+
+.mediaTvProgramCell {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    display: flex;
+    align-items: stretch;
+    gap: .5rem;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 5px;
+    background: #303030;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+}
+
+.mediaTvProgramCell:hover,
+.mediaTvProgramCell:focus-visible {
+    background: #3a3a3a;
+    border-color: var(--tv-accent);
+}
+
+.mediaTvProgramCell img {
+    width: 70px;
+    object-fit: cover;
+}
+
+.mediaTvProgramCell__body {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    padding: .5rem;
+}
+
+.mediaTvProgramCell__body strong,
+.mediaTvProgramCell__body small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mediaMiniPlayer {
+    position: fixed;
+    right: 1rem;
+    top: 5rem;
+    z-index: 100;
+    width: min(360px, 35vw);
+    background: #111;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0,0,0,.45);
+}
+
+.mediaMiniPlayer video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.mediaMiniPlayer__title {
+    padding: .6rem .75rem;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    .mediaHeroBanner {
+        min-height: 55vh;
+    }
+
+    .mediaMovieCard {
+        flex-basis: 135px;
+    }
+
+    .mediaTvChannelRow {
+        grid-template-columns: 150px 1fr;
+    }
+
+    .mediaTvChannelRow__channel img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .mediaMiniPlayer {
+        right: .5rem;
+        width: 46vw;
+    }
+}
