@@ -6,6 +6,7 @@ import globalize from '../../../lib/globalize';
 import { clearBackdrop } from '../../../components/backdrop/backdrop';
 import layoutManager from '../../../components/layoutManager';
 import Page from '../../../components/Page';
+import MediaPageShell from '../../../components/media-ui/MediaPageShell';
 import { EventType } from 'constants/eventType';
 import Events from 'utils/events';
 
@@ -66,9 +67,11 @@ const Home = () => {
             case 0:
                 depends = 'hometab';
                 break;
-
             case 1:
                 depends = 'favorites';
+                break;
+            default:
+                depends = 'hometab';
         }
 
         return import(/* webpackChunkName: "[request]" */ `../../../apps/legacy/controllers/${depends}`).then(({ default: ControllerFactory }) => {
@@ -151,7 +154,7 @@ const Home = () => {
         return () => {
             onPause();
         };
-    }, [onPause, renderHome]);
+    }, [ onPause, renderHome ]);
 
     useEffect(() => {
         const doc = documentRef.current;
@@ -163,25 +166,27 @@ const Home = () => {
     }, [ renderHome ]);
 
     return (
-        <div ref={element}>
-            <Page
-                id='indexPage'
-                className='mainAnimatedPage homePage libraryPage allLibraryPage pageWithAbsoluteTabs withTabs'
-                isBackButtonEnabled={false}
-                backDropType={[
-                    BaseItemKind.Movie,
-                    BaseItemKind.Series,
-                    BaseItemKind.Book
-                ]}
-            >
-                <div className='tabContent pageTabContent' id='homeTab' data-index='0'>
-                    <div className='sections'></div>
-                </div>
-                <div className='tabContent pageTabContent' id='favoritesTab' data-index='1'>
-                    <div className='sections'></div>
-                </div>
-            </Page>
-        </div>
+        <MediaPageShell mode='netflix'>
+            <div ref={element}>
+                <Page
+                    id='indexPage'
+                    className='mainAnimatedPage homePage libraryPage allLibraryPage pageWithAbsoluteTabs withTabs'
+                    isBackButtonEnabled={false}
+                    backDropType={[
+                        BaseItemKind.Movie,
+                        BaseItemKind.Series,
+                        BaseItemKind.Book
+                    ]}
+                >
+                    <div className='tabContent pageTabContent' id='homeTab' data-index='0'>
+                        <div className='sections'></div>
+                    </div>
+                    <div className='tabContent pageTabContent' id='favoritesTab' data-index='1'>
+                        <div className='sections'></div>
+                    </div>
+                </Page>
+            </div>
+        </MediaPageShell>
     );
 };
 
