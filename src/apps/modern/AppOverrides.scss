@@ -25,16 +25,17 @@ $mui-bp-xl: 1536px;
     padding-top: 0 !important;
 }
 
-.mediaPageShell--netflix {
+body.media-mode-netflix {
+    background: #141414 !important;
+
     .skinHeader {
         background: transparent;
         transition: background-color 180ms ease, backdrop-filter 180ms ease;
     }
+}
 
-    &.mediaPageShell--scrolled .skinHeader,
-    .skinHeader:hover {
-        background: #141414;
-    }
+body.media-mode-livetv {
+    background: #1f1f1f !important;
 }
 
 .layout-mobile {
