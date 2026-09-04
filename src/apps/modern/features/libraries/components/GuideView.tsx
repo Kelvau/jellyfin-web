@@ -18,7 +18,7 @@ const GuideView: FC = () => {
 
     const initGuide = useCallback((element: HTMLDivElement) => {
         guideInstance.current = new Guide({
-            element: element,
+            element,
             serverId: window.ApiClient.serverId()
         });
     }, []);
@@ -32,31 +32,29 @@ const GuideView: FC = () => {
         if (!guideInstance.current) {
             initGuide(element);
         }
-    }, [initGuide]);
+    }, [ initGuide ]);
 
     useEffect(() => {
-        if (guideInstance.current) {
-            guideInstance.current.resume();
-        }
+        guideInstance.current?.resume();
 
         return () => {
-            if (guideInstance.current) {
-                guideInstance.current.pause();
-            }
+            guideInstance.current?.pause();
         };
-    }, [initGuide]);
+    }, [ initGuide ]);
 
-    return <Box
-        ref={tvGuideContainerRef}
-        className='absolutePageTabContent'
-        sx={{
-            display: 'flex !important',
-            width: 'auto',
-            paddingTop: '0',
-            paddingBottom: '0 !important',
-            top: '0 !important'
-        }}
-    />;
+    return (
+        <Box
+            ref={tvGuideContainerRef}
+            className='absolutePageTabContent plexLiveTvGuide'
+            sx={{
+                display: 'flex !important',
+                width: 'auto',
+                paddingTop: '0',
+                paddingBottom: '0 !important',
+                top: '0 !important'
+            }}
+        />
+    );
 };
 
 export default GuideView;
