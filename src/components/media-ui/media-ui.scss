@@ -17,7 +17,6 @@
     background: var(--tv-surface);
 }
 
-/* Netflix-style library experience */
 .mediaPageShell--netflix .homePage,
 .mediaPageShell--netflix .libraryPage {
     background: var(--media-black) !important;
@@ -191,13 +190,45 @@
     font-size: 1.2rem;
 }
 
-/* Plex-style Live TV guide */
 .mediaPageShell--livetv .libraryPage {
     background: var(--tv-surface) !important;
 }
 
 .mediaPageShell--livetv .sectionTitle {
     color: #f5f5f5;
+}
+
+.plexLiveTvGuide {
+    background: #1f1f1f;
+}
+
+.plexLiveTvGuide .guideHeader,
+.plexLiveTvGuide .guideChannel,
+.plexLiveTvGuide .guideProgram {
+    background-color: #242424;
+}
+
+.plexLiveTvGuide .programCell {
+    background: #303030;
+    border-radius: 5px;
+    transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.plexLiveTvGuide .programCell:hover,
+.plexLiveTvGuide .programCell:focus-within {
+    background: #3a3a3a;
+    border-color: var(--tv-accent);
+    transform: translateY(-1px);
+}
+
+.plexLiveTvGuide .programCell .programProgress {
+    background: var(--tv-accent);
+}
+
+.plexLiveTvGuide .guideNowLine,
+.plexLiveTvGuide .nowLine {
+    background: #e53935 !important;
+    width: 2px;
 }
 
 .mediaTvGuide {
