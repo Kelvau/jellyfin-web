@@ -10,6 +10,24 @@ import { createApiClient } from 'utils/jellyfin-apiclient/createApiClient';
 
 import ConnectionManager from './connectionManager';
 
+const CODE_SPACE_PROXY_PATH = '/jellyfin-proxy';
+const JELLYFIN_HTTP_SERVER = 'http://tv.steinov.co:8096';
+
+const normalizeDevServerAddress = serverAddress => {
+    if (!serverAddress || typeof window === 'undefined') {
+        return serverAddress;
+    }
+
+    const hostname = window.location.hostname;
+    const isCodespace = hostname.endsWith('.app.github.dev') || hostname === 'localhost' || hostname === '127.0.0.1';
+
+    if (isCodespace && serverAddress.replace(/\/$/, '') === JELLYFIN_HTTP_SERVER) {
+        return `${window.location.origin}${CODE_SPACE_PROXY_PATH}`;
+    }
+
+    return serverAddress;
+};
+
 const normalizeImageOptions = options => {
     if (!options.quality && (options.maxWidth || options.width || options.maxHeight || options.height || options.fillWidth || options.fillHeight)) {
         options.quality = 90;
@@ -61,8 +79,14 @@ class ServerConnections extends ConnectionManager {
     initApiClient(server) {
         console.debug('creating ApiClient singleton');
 
+        const serverAddress = normalizeDevServerAddress(server);
+
+        if (serverAddress !== server) {
+            console.info('[ServerConnections] Using Codespaces proxy for Jellyfin server:', server);
+        }
+
         const apiClient = createApiClient(
-            server,
+            serverAddress,
             appHost.appName(),
             appHost.appVersion(),
             appHost.deviceName(),
