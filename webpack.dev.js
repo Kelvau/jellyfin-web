@@ -31,8 +31,7 @@ module.exports = merge(common, {
                 pathRewrite: {
                     [`^${JELLYFIN_PROXY_PATH}`]: ''
                 },
-                secure: false,
-                logLevel: 'warn'
+                secure: false
             }
         ],
         client: {
