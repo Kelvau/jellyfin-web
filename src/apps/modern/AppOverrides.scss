@@ -23,6 +23,25 @@ $mui-bp-xl: 1536px;
     padding-top: 0 !important;
 }
 
+// Make the login screen fill the viewport without a page scrollbar.
+// The login page can otherwise make the document slightly taller than the viewport.
+#loginPage {
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+// Prevent the document itself from creating a vertical scrollbar while login is active.
+html:has(#loginPage:not(.hide)),
+body:has(#loginPage:not(.hide)) {
+    overflow: hidden !important;
+    height: 100%;
+}
+
 .layout-mobile {
     .itemDetailPage {
         // Fix horizontal panning on mobile item details page
